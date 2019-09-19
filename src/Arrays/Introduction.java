@@ -46,6 +46,9 @@ public class Introduction {
 	}
 	
 	/**
+	 * printing time is quadratic nxm
+	 * where n - is the size of each array
+	 * and m - is the number of arrays
 	 * 
 	 * @param arr
 	 */
