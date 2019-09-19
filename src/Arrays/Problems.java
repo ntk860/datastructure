@@ -72,7 +72,7 @@ public class Problems {
 	 * is at the last position should return 0 because
 	 * the array didn't rotate or rotated the number of 
 	 * times that equal to the number of elements that 
-	 * the array has.
+	 * the array has. [This solution was easy to find - in less than one minute]
 	 * 
 	 * Time complexity : O(n)
 	 * Auxiliary Space : O(1)
