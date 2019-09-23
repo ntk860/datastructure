@@ -33,6 +33,17 @@ public class LinkedList {
     }
     
     /**
+     * Insert a node to the linked list
+     * at a specific position.
+     * 
+     * @param val
+     * @param pos
+     */
+    public void insert(int val, int pos) {
+    	
+    }
+    
+    /**
      * Remove a node from the linked list
      * assuming the node is present 
      * @param val
