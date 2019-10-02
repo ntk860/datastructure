@@ -75,4 +75,27 @@ public class LinkedList {
     	}
     	System.out.println();
     }
+    
+    /**
+	 * You are given two non-empty linked lists representing two non-negative integers. 
+	 * The digits are stored in reverse order and each of their nodes contain a single digit. 
+	 * Add the two numbers and return it as a linked list.
+	 * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+	 */
+	public static void addTwoNumbers(Node l1, Node l2) {
+		Node m = l1;
+		Node n = l2;
+		
+		int remainder = 0;
+		while(m != null) {
+			if(m.data + n.data >= 10) {
+				System.out.println(0);
+				remainder = (m.data + n.data) % 10;
+			}
+			else {
+				System.out.println(m.data + n.data + remainder);
+			}
+		}
+	}
+    
 }
