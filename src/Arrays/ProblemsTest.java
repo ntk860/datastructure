@@ -89,11 +89,7 @@ class ProblemsTest {
 		System.out.println(demo.lengthOfLongestSubstring("aabvbccddddddplkompfnsef"));
 	}
 	
-	@Test
-	void decodeString() {
-		System.out.println("ProblemsTest.decodeString()");
-		System.out.println(demo.decodeString("2[abc]3[cd]ef"));
-	}*/
+	*/
 	
 	@Test
 	void isIsomorphic() {
@@ -117,7 +113,7 @@ class ProblemsTest {
 	void wordBreak() {
 		System.out.println("ProblemsTest.wordBreak()");
 		
-		String word = "arroz";
+		String word = "andcat";
 		List<String> wordDict = new LinkedList<>();
 		
 		wordDict.add("cats");
@@ -130,5 +126,33 @@ class ProblemsTest {
 		
 	}
 	
+	@Test
+	void KadaneCircular() {
+		int[] arr = new int[] {2, 1, -5, 4, -3, 1, -3 , 4, -1};
+		System.out.println("ProblemsTest.KadaneCircular()");
+		System.out.println(demo.KadaneCircular(arr, 9));
+	}
+	
+	@Test
+	void frequencyGame() {
+		int[] arr = new int[] {7, 3, 15, 2, 15, 3, 8, 5, 2, 3, 30, 2, 4, 30, 15, 30};
+		System.out.println("ProblemsTest.frequencyGame()");
+		
+		System.out.println(demo.frequencyGame(arr, 16));
+	}
+	
+	@Test
+	void countStringsUnderConditions() {
+		System.out.println("ProblemsTest.countStringsUnderConditions()");
+		System.out.println(demo.countStringsUnderConditions(3));
+	}
+	
+	@Test
+	void decodeString() {
+		System.out.println("ProblemsTest.decodeString()");
+		System.out.println(demo.decodeString("2[abc]3[cd]ef"));
+		//System.out.println(demo.decodeString("3[a]2[bc]"));
+		//System.out.println(demo.decodeString("3[a2[c]]"));
+	}
 
 }

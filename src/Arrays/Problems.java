@@ -399,39 +399,45 @@ public class Problems {
         String result = "";
         
         Stack<Character> mainStack = new Stack<>();
-        Stack<Character> helperStack = new Stack<>();
         
         // fill the main stack
-        for(char c : s.toCharArray()) {
-        	mainStack.push(c);
+        for(int i = s.length() - 1; i >= 0; i--) {
+        	mainStack.push(s.charAt(i));
         }
         
+        int n = 0;
+        
         while(!mainStack.isEmpty()) {
-        	char val = mainStack.pop();
+        	char mainC = mainStack.pop();
         	
-        	if(val != '[') 
-        		helperStack.push(val);
-        	else {
-        		
-        		int n = Character.getNumericValue(mainStack.pop());
-        		char tmpChar = helperStack.pop();
-        		String tmpStr = "";
-        		tmpStr += tmpChar;
+        	if(mainC >= '0' && mainC <= '9') {
+        		n = Character.getNumericValue(mainC);
+        	} else
+        		if(mainC != '[' && mainC != ']')
+        			result+=mainC;
         	
-        		while(tmpChar != ']') {
-        			tmpChar = helperStack.pop();	
-        			if(tmpChar != ']')
-        				tmpStr += tmpChar;
-        		}
-        		
-        		for(int i=1; i <= n; i++) {
-        			result = result + tmpStr;
-        		}
-        	
+        	if(mainC == '[') {
+        		String str = "";
+            	while(!mainStack.isEmpty()) {
+            		char tmpC = mainStack.pop();
+            		
+            		if(tmpC != ']' && tmpC != '[')
+            			str+=tmpC;
+            		
+            		if(tmpC == ']')
+            			break;
+            	}
+
+            	String toConcat = str;
+            	for(int i=1; i<=n-1; i++) {
+            		str+=toConcat;
+            	}
+            	
+            	result+=str;
         	}
         }
         
-        System.out.println(helperStack);
+        //System.out.println(result);
         return result;
     }
 	
@@ -575,8 +581,8 @@ public class Problems {
             	
             	while(lengthSubstr <= s.length()) {
             		
-            		String subStr = s.substring(subIndex, lengthSubstr);
-            		if(wordDict.get(i).concat(wordDict.get(j)).compareTo(subStr) == 0) {
+            		String subStr = wordDict.get(subIndex).concat(wordDict.get(j));
+            		if((subStr).compareTo(s) == 0) {
             			System.out.println(subStr);
                 		
             			result = true;
@@ -595,4 +601,101 @@ public class Problems {
         
         return result;
     }
+	
+	/**
+	 * 
+	 */
+	int KadaneCircular(int arr[], int n) {
+		
+		int maxSoFar = Integer.MIN_VALUE;
+		int maxEndHere = 0;
+		
+		int i = 0;
+		
+		while(i < n) {
+			maxEndHere += arr[i];
+			
+			maxSoFar = Math.max(maxSoFar, maxEndHere);
+			if(maxEndHere < 0)
+				maxEndHere = 0;
+
+			i++;
+		}
+		
+		return maxSoFar;
+		
+	}
+	
+	/**
+	 * Given an array A of size N. The elements of the array 
+	 * consists of positive integers. You have to 
+	 * find the largest element with minimum frequency.
+	 * 
+	 * O(n)
+	 * auxiliar space O(n)
+	 */
+	int frequencyGame(int[] arr, int n) {
+		int max = arr[0];
+		int prevMax = arr[0];
+		HashMap<Integer, Integer> fcounter = new HashMap<>();
+		
+		fcounter.put(max, 1);
+		for(int i=1; i < n; i++) {
+			if(max <= arr[i]) {
+				
+				if(fcounter.containsKey(arr[i])) {
+					fcounter.put(arr[i], fcounter.get(arr[i] + 1));
+					max = Math.min(max, prevMax);
+				}
+				else {
+					fcounter.put(arr[i], 1);
+					prevMax = max;
+					max = arr[i];
+				}
+			}
+		}
+		
+		return max;
+	}
+	
+	private static int countCharacter(String s, char c) {
+		int counter = 0;
+		for(int i=0; i < s.length(); i++) {
+			if(s.charAt(i) == c) 
+				counter++;
+		}
+		
+		return counter;
+	}
+	
+	/**
+	 * 
+	 * @param n
+	 * @return
+	 */
+	int countStringsUnderConditions(int n) {
+		HashSet<String> resultSet = new HashSet<>();
+		
+		char[] inputChars = new char[] {'a', 'b', 'c'};
+		String input = "abc";
+		
+		for(int i=0; i <=2; i++) {
+			String tmp = String.valueOf(inputChars[i]);
+			for(int j=i; j <= 2; j++) {
+				System.out.println(tmp);
+				if(tmp.length() == n) {
+					int bcounter = countCharacter(tmp, 'b');
+					int ccounter = countCharacter(tmp, 'c');
+					
+					if(bcounter <= 1 && ccounter <= 2) 
+						resultSet.add(tmp);
+				}
+				
+				tmp+=String.valueOf(inputChars[j]);
+			}
+		}
+		
+		System.out.println(resultSet);
+		return resultSet.size();
+	}
 }
