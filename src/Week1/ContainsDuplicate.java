@@ -25,6 +25,7 @@ import java.util.Set;
  *  	if we find them again it is because its a duplicate
  *  	its going to take O(n) and space of O(n)
  */
+
 public class ContainsDuplicate {
 
 	public static void main(String[] args) {
