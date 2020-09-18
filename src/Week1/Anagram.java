@@ -1,6 +1,8 @@
 package Week1;
 
 import java.util.Arrays;
+import java.util.Hashtable;
+import java.util.Map.Entry;
 
 /**
  * 
@@ -24,7 +26,8 @@ public class Anagram {
 		String s = "anagram";
 		String t = "nagaram";
 		
-		System.out.println(isAnagram(s, t));
+		System.out.println(isAnagramV2(s, t));
+		//System.out.println(isAnagram(s, t));
 
 	}
 
@@ -37,7 +40,7 @@ public class Anagram {
         Arrays.sort(arrS);
         Arrays.sort(arrT);
         
-        for(int i=0; i < s.length(); i++) {
+        for(int i = 0; i < s.length(); i++) {
         	if(arrS[i] != arrT[i]) {
         		result = false;
         		break;
@@ -46,4 +49,50 @@ public class Anagram {
         
         return result;
     }
+	
+	private static Hashtable<Character, Integer> fillMap(Hashtable<Character, Integer> cmap, char c) {
+		if(cmap.containsKey(c)) {
+			int counter = cmap.get(c);
+			
+			counter++;
+			cmap.put(c, counter);
+		}
+		else {
+			cmap.put(c, 1);
+		}
+		
+		return cmap;
+	}
+	
+	public static boolean isAnagramV2(String s, String t) {
+		boolean result = true;
+		
+		Hashtable<Character, Integer> helperTableS = new Hashtable<Character, Integer>();
+		Hashtable<Character, Integer> helperTableT = new Hashtable<Character, Integer>();
+		
+		// assuming len(s) == len(t)
+		for(int i = 0; i < s.length(); i++) {
+			
+			fillMap(helperTableS, s.charAt(i));
+			fillMap(helperTableT, t.charAt(i));
+			
+		}
+		
+		for(Entry<Character, Integer> letterCounter : helperTableS.entrySet()) {
+			if(helperTableT.containsKey(letterCounter.getKey())) {
+				int counterT = helperTableT.get(letterCounter.getKey());
+			
+				if(counterT != letterCounter.getValue()) {
+					result = false;
+					break;
+				}
+			}
+			else {
+				result = false;
+				break;
+			}
+		}
+		
+		return result;
+	}
 }

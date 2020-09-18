@@ -29,10 +29,10 @@ public class Profit {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] A = {7, 1, 5, 3, 6, 4};
-		//int[] B = {7, 6, 4, 3, 1};
+		//int[] A = {7, 1, 5, 3, 6, 4};
+		int[] B = {5, 11, 3, 50, 60, 90};
 		
-		System.out.println(maxProfit(A));
+		System.out.println(maxProfitByK(B, 2));
 
 	}
 	
@@ -54,5 +54,27 @@ public class Profit {
         
         return profit;
     }
+	
+	public static int maxProfitByK(int[] prices, int k) {
+		int maxProfit = 0;
+		
+		for(int j = 1; j <= k; j++) {
+			int buy = prices[0];
+			int profit = 0;
+			for(int i = 1; i < prices.length; i++) {
+				if(prices[i] > buy) {
+					if(prices[i] - buy > profit) {
+						profit = prices[i] - buy;
+						
+						System.out.println(profit);
+					}
+				}
+			}
+			
+			maxProfit += profit;
+		}
+		
+		return maxProfit;
+	}
 
 }
