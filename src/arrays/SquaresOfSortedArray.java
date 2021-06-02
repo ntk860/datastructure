@@ -19,7 +19,7 @@ public class SquaresOfSortedArray {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		/*Assert.assertArrayEquals(new int[]{1, 4, 9, 25}, sortedSquares(new int[]{-5, -3, -2, -1}));
+		Assert.assertArrayEquals(new int[]{1, 4, 9, 25}, sortedSquares(new int[]{-5, -3, -2, -1}));
 		
 		Assert.assertArrayEquals(new int[]{0, 1, 4, 9, 16, 100}, sortedSquares(new int[]{-4, -2, -1, 0, 3, 10}));
 		
@@ -29,12 +29,9 @@ public class SquaresOfSortedArray {
 		
 		Assert.assertArrayEquals(new int[]{0, 1, 1, 1, 16}, sortedSquares(new int[]{-4, 0, 1, 1, 1}));
 		
-		Assert.assertArrayEquals(new int[]{0, 0, 1, 1, 4, 9, 9, 16, 100}, sortedSquares(new int[]{-4, -2, -1, -1, 0, 0, 3, 3, 10}));*/
+		Assert.assertArrayEquals(new int[]{0, 0, 1, 1, 4, 9, 9, 16, 100}, sortedSquares(new int[]{-4, -2, -1, -1, 0, 0, 3, 3, 10}));
 		
-		//Assert.assertArrayEquals(new int[]{0, 1, 3, 16}, sortedSquares(new int[]{-4, 0, 1, 3}));
-		
-		int[] result = sortedSquares(new int[]{-4, 0, 1, 1, 1});
-		for(int numb : result) System.out.println(numb);
+		Assert.assertArrayEquals(new int[]{0, 1, 9, 16}, sortedSquares(new int[]{-4, 0, 1, 3}));
 		
 		System.out.println("all passed");
 	}
@@ -55,20 +52,21 @@ public class SquaresOfSortedArray {
 			int counter = negativeValuesTrackerPosition;
 			for(int j = negativeValuesTrackerPosition; j >= 0; j--) {
 
-				if(nums[j] >= current && nums[j] <= nextPositionValue) {
+				counter = j;
+				//System.out.println(j + " " + nextPositionValue + " " + i + " current = " + current);
+				if(nums[j] >= current && nums[j] < nextPositionValue) {
 					result[resultPosition++] = nums[j];
 				}
 				else {
 					break;
 				}
-				
-				counter = j;
-
 			}
 			
-			negativeValuesTrackerPosition = counter - 1;
+			negativeValuesTrackerPosition = counter;
 			nextPositionValue = i + 1 >= nums.length ? Integer.MAX_VALUE : nums[i + 1];
 		}
+		
+		for(int i = 0; i < result.length; i++) result[i] = result[i] * result[i];
 		
 		return result;
     }
@@ -97,6 +95,5 @@ public class SquaresOfSortedArray {
 		
 		return smallestPosition;
 	}
-	
 	
 }
