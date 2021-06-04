@@ -3,6 +3,11 @@ package arrays;
 public class MergeSortedArray {
 
 	public static void main(String[] args) {
+
+		/*int[] nums1 = new int[] {-1,0,0,3,3,3,0,0,0};
+		int[] nums2 = new int[] {1, 2, 2};
+		int m = 6, n = 3;*/
+		
 		int[] nums1 = new int[] {0};
 		int[] nums2 = new int[] {1};
 		int m = 0, n = 1;
@@ -16,20 +21,22 @@ public class MergeSortedArray {
 	public static void merge(int[] nums1, int m, int[] nums2, int n) {
 		int j = 0, i = 0;
 		
-        while(i < m - 1) {
-        	if(nums2[j] <= nums1[i]) {
-        		shiftToRight(nums1, i, nums2[j]);
-        		j++;
-        		i++;
+        while(i < m + n) {
+        	if(j < n) {
+        		if(nums2[j] <= nums1[i]) {
+            		shiftToRight(nums1, i, nums2[j]);
+            		j++;
+            	}
+        		
+        		if(i + 1 > n) {
+        			if(nums1[i] == 0) {
+            			shiftToRight(nums1, i, nums2[j]);
+                		j++;
+            		}
+        		}
         	}
         	
         	i++;
-        }
-        
-        if(j < n) {
-        	for(int k = i + 1; k < (m + n); k++) {
-        		nums1[k] = nums2[j++];
-        	}
         }
     }
 	
